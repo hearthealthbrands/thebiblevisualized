@@ -3,6 +3,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/images");
 
+eleventyConfig.addPassthroughCopy("src/js");
+
   // 2. ADD THIS: The missing "dateString" filter
   eleventyConfig.addFilter("dateString", (dateObj) => {
     // This turns the raw date into "November 25, 2025"
