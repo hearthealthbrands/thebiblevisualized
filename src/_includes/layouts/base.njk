@@ -17,7 +17,7 @@
     <meta property="og:image" content="https://thebiblevisualized.com{{ image }}" />
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://thebiblevisualized.com{{ image }}">
+    <meta name="twitter:site" content="@TheBibleViz"> <meta name="twitter:image" content="https://thebiblevisualized.com{{ image }}">
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -65,7 +65,19 @@
 
         <button id="share-btn">Share this Page</button>
         
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            
+            <a href="mailto:hello@thebiblevisualized.com" style="font-size: 0.9rem; color: var(--accent); text-decoration: none;">
+                hello@thebiblevisualized.com
+            </a>
+
+            <a href="https://x.com/TheBibleViz" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; color: var(--text-muted); text-decoration: none; border-bottom: 1px dotted var(--text-muted);">
+                Follow @TheBibleViz
+            </a>
+            
+        </div>
+
+        <div style="margin-top: 20px;">
             <p>&copy; <span id="copyright-year">2025</span> The Bible Visualized</p>
             <p>Visualizing the Word, one verse at a time.</p>
         </div>
