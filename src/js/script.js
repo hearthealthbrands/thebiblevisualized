@@ -1,54 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. Find the Share Button (we will add this to the HTML in a second)
+    // 1. SHARE BUTTON LOGIC
     const shareBtn = document.getElementById('share-btn');
     
-    // 2. Check if the browser supports native sharing (most mobiles do)
     if (shareBtn && navigator.share) {
-        
         shareBtn.addEventListener('click', async () => {
             try {
-                // This triggers the native iOS/Android share sheet
                 await navigator.share({
                     title: document.title,
                     text: 'Check out this visualization of scripture:',
                     url: window.location.href
                 });
-                console.log('Shared successfully');
             } catch (err) {
                 console.log('Error sharing:', err);
             }
         });
     } else if (shareBtn) {
-        // Fallback for desktop browsers that don't support native share
-        // We just copy the URL to the clipboard
+        // Fallback for desktop
         shareBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(window.location.href);
             alert('Link copied to clipboard!');
         });
     }
 
-/* --- EXISTING SHARE LOGIC IS ABOVE HERE --- */
+    // 2. DYNAMIC YEAR
+    const yearSpan = document.querySelector('#copyright-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 
-    // 4. Copy Verse Logic
+    // 3. COPY VERSE LOGIC
     const copyBtn = document.getElementById('copy-verse-btn');
     const verseTextElement = document.getElementById('daily-verse');
 
     if (copyBtn && verseTextElement) {
         copyBtn.addEventListener('click', async () => {
             try {
-                // Get the text inside the blockquote
                 const textToCopy = verseTextElement.innerText;
-                
-                // Use the Clipboard API
                 await navigator.clipboard.writeText(textToCopy);
                 
-                // Visual Feedback: Change button text
+                // Visual Feedback
                 const originalText = copyBtn.innerText;
                 copyBtn.innerText = "Copied!";
-                copyBtn.classList.add('copied-state'); // Optional: for CSS styling
+                copyBtn.classList.add('copied-state');
                 
-                // Revert back after 2 seconds
                 setTimeout(() => {
                     copyBtn.innerText = originalText;
                     copyBtn.classList.remove('copied-state');
@@ -60,9 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Dynamic Copyright Year (Automation!)
-    const yearSpan = document.querySelector('#copyright-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
+    // 4. VISUAL PEACE (Blur-Up Image Loader)
+    // Selects both gallery thumbnails and the main hero image
+    const images = document.querySelectorAll('.image-wrapper img, .verse-container img');
+
+    images.forEach(img => {
+        const reveal = () => {
+            img.classList.add('loaded');
+        };
+
+        // If the image is already cached (instant load), reveal it immediately
+        if (img.complete) {
+            reveal();
+        } else {
+            // Otherwise wait for the download to finish
+            img.addEventListener('load', reveal);
+        }
+    });
+
 });
