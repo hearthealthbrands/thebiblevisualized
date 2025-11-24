@@ -1,10 +1,19 @@
 module.exports = function(eleventyConfig) {
   // 1. Pass through CSS and Images directly to the final site
-  // This means if you put a file in src/images, it moves to _site/images automatically
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/images");
 
-  // 2. Output Settings
+  // 2. ADD THIS: The missing "dateString" filter
+  eleventyConfig.addFilter("dateString", (dateObj) => {
+    // This turns the raw date into "November 25, 2025"
+    return new Date(dateObj).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  });
+
+  // 3. Output Settings
   return {
     dir: {
       input: "src",
