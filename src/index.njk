@@ -6,12 +6,19 @@ title: Home
 <div class="gallery-grid">
   {% for post in collections.post | reverse %}
     <a href="{{ post.url }}" class="gallery-card">
+      
       <div class="image-wrapper">
-        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" loading="lazy">
+        <img 
+          src="{{ post.data.image }}" 
+          alt="{{ post.data.title }}" 
+          loading="lazy"
+          style="view-transition-name: img-{{ post.fileSlug }};"
+        >
       </div>
       
       <div class="card-info">
-        <h3>{{ post.data.title }}</h3> <span class="date">{{ post.date | dateString }}</span> </div>
+        <h3>{{ post.data.title }}</h3> <span class="date">{{ post.date | dateString }}</span>
+      </div>
     </a>
   {% endfor %}
 </div>
