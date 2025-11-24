@@ -47,6 +47,7 @@ main {
     margin: 0 auto;
     padding: 40px 20px;
     animation: fadeIn 0.8s ease-in-out; /* Gentle fade-in on load */
+    min-height: 60vh; /* Ensures footer doesn't float up on empty pages */
 }
 
 a {
@@ -84,30 +85,58 @@ blockquote {
    ========================================= */
 header {
     text-align: center;
-    padding: 40px 20px;
-    background-color: var(--bg-paper); /* Blends with body */
+    padding: 50px 20px 30px 20px; /* More space on top */
+    background-color: var(--bg-paper);
+    border-bottom: 1px solid rgba(0,0,0,0.05); /* Very subtle separator */
 }
 
-header nav a {
+/* The "Gallery Wordmark" Logo */
+.logo-text {
     font-family: var(--font-serif);
-    font-weight: 600;
-    letter-spacing: 1px;
-    font-size: 1.5rem;
-    text-transform: uppercase;
+    font-weight: 400; /* Standard weight for elegance */
+    font-size: 2.2rem; /* Nice and large */
     color: var(--text-main);
+    letter-spacing: -0.5px; /* Tighter kerning feels more editorial */
+    text-decoration: none;
 }
 
-header .sub-nav {
-    margin-top: 15px;
+/* Style the emphasized word */
+.logo-text em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-main); /* Keep it the same color, just italic */
+}
+
+/* Sub-navigation links */
+.sub-nav {
+    margin-top: 20px;
     font-family: var(--font-sans);
     font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-header .sub-nav a {
-    margin: 0 10px;
+.sub-nav a {
+    margin: 0 15px;
     color: var(--text-muted);
-    text-transform: none;
-    letter-spacing: 0;
+    font-weight: 600;
+    position: relative; /* Needed for the hover effect below */
+}
+
+/* A subtle underline hover effect for nav links */
+.sub-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.sub-nav a:hover::after {
+    width: 100%;
 }
 
 /* =========================================
@@ -283,7 +312,64 @@ footer {
 }
 
 /* =========================================
-   9. ANIMATIONS
+   9. ABOUT PAGE
+   ========================================= */
+.about-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.about-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    font-family: var(--font-serif);
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 40px auto;
+    width: 50%;
+}
+
+.mission-section h3 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-family: var(--font-sans);
+}
+
+.mission-section p {
+    text-align: left; /* Easier to read paragraphs when left-aligned */
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.cta-section {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    font-style: italic;
+    font-family: var(--font-serif);
+}
+
+/* =========================================
+   10. ANIMATIONS
    ========================================= */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -296,4 +382,5 @@ footer {
     blockquote { font-size: 1.2rem; }
     .subscribe-box input { width: 100%; margin-bottom: 10px; }
     .form-row { flex-direction: column; }
+    .logo-text { font-size: 1.8rem; }
 }
