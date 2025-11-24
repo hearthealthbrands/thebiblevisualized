@@ -131,3 +131,59 @@
     border-color: #4CAF50;
     color: white;
 }
+
+/* --- Subscribe Box --- */
+.subscribe-box {
+    background-color: #f4f4f4;
+    padding: 30px 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto 30px auto; /* Centered with space below */
+    text-align: center;
+}
+
+.subscribe-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.subscribe-box p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none; /* Hides the honeypot from humans */
+}
+
+/* The Input + Button Row */
+.form-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.form-row input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1; /* Takes up available space */
+    font-size: 1rem;
+}
+
+.form-row button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.form-row button:hover {
+    background-color: #000;
+}
