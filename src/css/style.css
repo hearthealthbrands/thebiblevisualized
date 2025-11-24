@@ -376,11 +376,63 @@ footer {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile Tweak */
+/* =========================================
+   11. MOBILE POLISH (The "App" Feel)
+   ========================================= */
 @media (max-width: 600px) {
+    
+    /* 1. COMPACT HEADER: Save screen space */
+    header {
+        padding: 30px 15px 20px 15px; /* Reduce top padding significantly */
+    }
+    
+    .logo-text {
+        font-size: 1.8rem; /* Slightly smaller logo */
+    }
+
+    /* 2. THUMB-FRIENDLY NAV: Make links easier to tap */
+    .sub-nav a {
+        padding: 10px 15px; /* Increases the clickable area */
+        margin: 0 5px;
+        display: inline-block; /* Essential for padding to work */
+    }
+
+    /* 3. INPUT ZOOM FIX: Prevents iOS from zooming in when typing */
+    input[type="email"], input[type="text"] {
+        font-size: 16px !important; /* Must be 16px+ on iOS */
+    }
+
+    /* 4. TACTILE FEEDBACK: Since there is no "Hover", use "Active" (Press) */
+    .gallery-card:active, .action-btn:active, #share-btn:active {
+        transform: scale(0.98); /* Shrinks slightly when you touch it */
+        background-color: rgba(0,0,0,0.05); /* subtle flash */
+    }
+
+    /* 5. REMOVE BLUE TAP BOX: Removes the default blue highlight on Android/iOS */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* 6. FULL WIDTH GALLERY: Make images immersive */
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Force single column */
+        gap: 25px;
+    }
+    
+    .gallery-card {
+        border-radius: 0; /* Optional: Edge-to-edge look like Instagram */
+        box-shadow: none; /* Flat design looks better on mobile lists */
+        border-bottom: 1px solid #eee; /* Simple separator */
+    }
+    
+    /* Make the image wrapper slightly shorter so you can see the title peeking up */
+    .image-wrapper {
+        aspect-ratio: 4/3; 
+    }
+    
+    /* Mobile text adjustments */
     .verse-container h1 { font-size: 1.5rem; }
     blockquote { font-size: 1.2rem; }
     .subscribe-box input { width: 100%; margin-bottom: 10px; }
     .form-row { flex-direction: column; }
-    .logo-text { font-size: 1.8rem; }
 }
