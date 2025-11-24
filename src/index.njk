@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+
+<div class="gallery-grid">
+  {% for post in collections.post | reverse %}
+    <a href="{{ post.url }}" class="gallery-card">
+      <div class="image-wrapper">
+        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" loading="lazy">
+      </div>
+      
+      <div class="card-info">
+        <h3>{{ post.data.title }}</h3> <span class="date">{{ post.date | dateString }}</span> </div>
+    </a>
+  {% endfor %}
+</div>
