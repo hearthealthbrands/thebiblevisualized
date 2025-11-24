@@ -21,7 +21,14 @@
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+
+{% set previousPost = collections.post | getPreviousCollectionItem(page) %}
+{% set nextPost = collections.post | getNextCollectionItem(page) %}
+
+<body 
+    data-prev="{{ previousPost.url }}" 
+    data-next="{{ nextPost.url }}"
+>
 
     <header>
         <nav>
@@ -41,6 +48,17 @@
     </main>
 
     <footer>
+        
+        <div class="nav-links" style="margin-bottom: 40px; display: flex; justify-content: center; gap: 20px; font-family: var(--font-sans); font-size: 0.9rem;">
+            {% if previousPost %}
+                <a href="{{ previousPost.url }}" style="border-bottom: 1px solid var(--accent);">← Previous</a>
+            {% endif %}
+            
+            {% if nextPost %}
+                <a href="{{ nextPost.url }}" style="border-bottom: 1px solid var(--accent);">Next Verse →</a>
+            {% endif %}
+        </div>
+
         {% include "components/subscribe.njk" %}
 
         <hr style="margin: 30px auto; width: 50%; opacity: 0.3;">

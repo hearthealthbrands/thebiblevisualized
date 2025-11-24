@@ -1,32 +1,35 @@
 /* =========================================
    1. THE DNA (Variables & Fonts)
    ========================================= */
+/* Import Google Fonts: 'Lora' (Serif) and 'Inter' (Sans-Serif) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
     /* Color Palette: "Warm Minimalism" */
-    --bg-paper:      #F9F7F2;
-    --card-bg:       #FFFFFF;
-    --text-main:     #2C2C2C;
-    --text-muted:    #666666;
-    --accent:        #C5A065;
-    --accent-hover:  #B08D55;
+    --bg-paper:      #F9F7F2;  /* The warm off-white page background */
+    --card-bg:       #FFFFFF;  /* Pure white for cards so they "pop" */
+    --text-main:     #2C2C2C;  /* Charcoal (softer than black) */
+    --text-muted:    #666666;  /* For dates and secondary text */
+    --accent:        #C5A065;  /* Muted Gold for highlights */
+    --accent-hover:  #B08D55;  /* Slightly darker gold for hover states */
     
     /* Typography */
-    --font-serif:    'Lora', serif;
-    --font-sans:     'Inter', sans-serif;
+    --font-serif:    'Lora', serif;       /* For Verses & Headings */
+    --font-sans:     'Inter', sans-serif; /* For UI & Reflections */
     
     /* Spacing & Shapes */
-    --radius-card:   12px;
-    --radius-pill:   50px;
-    --shadow-soft:   0 4px 20px rgba(0, 0, 0, 0.05);
-    --shadow-hover:  0 8px 30px rgba(0, 0, 0, 0.12);
+    --radius-card:   12px;     /* Soft corners for images/cards */
+    --radius-pill:   50px;     /* Friendly "Pill" shape for buttons */
+    --shadow-soft:   0 4px 20px rgba(0, 0, 0, 0.05); /* The "floating" feel */
+    --shadow-hover:  0 8px 30px rgba(0, 0, 0, 0.12); /* Lift effect */
 }
 
 /* =========================================
    2. GLOBAL RESET & LAYOUT
    ========================================= */
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     background-color: var(--bg-paper);
@@ -35,15 +38,16 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; /* Makes fonts look crisp on Mac */
 }
 
+/* The Main Container - Like a sheet of paper centered on a desk */
 main {
     max-width: 900px;
     margin: 0 auto;
     padding: 40px 20px;
-    animation: fadeIn 0.8s ease-in-out;
-    min-height: 60vh;
+    animation: fadeIn 0.8s ease-in-out; /* Gentle fade-in on load */
+    min-height: 60vh; /* Ensures footer doesn't float up on empty pages */
 }
 
 a {
@@ -52,7 +56,9 @@ a {
     transition: color 0.2s ease;
 }
 
-a:hover { color: var(--accent); }
+a:hover {
+    color: var(--accent);
+}
 
 /* =========================================
    3. TYPOGRAPHY
@@ -69,7 +75,7 @@ blockquote {
     font-size: 1.4rem;
     font-style: italic;
     color: var(--text-main);
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--accent); /* The Gold Accent Line */
     margin: 30px 0;
     padding-left: 25px;
 }
@@ -79,26 +85,29 @@ blockquote {
    ========================================= */
 header {
     text-align: center;
-    padding: 50px 20px 30px 20px;
+    padding: 50px 20px 30px 20px; /* More space on top */
     background-color: var(--bg-paper);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05); /* Very subtle separator */
 }
 
+/* The "Gallery Wordmark" Logo */
 .logo-text {
     font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 2.2rem;
+    font-weight: 400; /* Standard weight for elegance */
+    font-size: 2.2rem; /* Nice and large */
     color: var(--text-main);
-    letter-spacing: -0.5px;
+    letter-spacing: -0.5px; /* Tighter kerning feels more editorial */
     text-decoration: none;
 }
 
+/* Style the emphasized word */
 .logo-text em {
     font-style: italic;
     font-weight: 400;
-    color: var(--text-main);
+    color: var(--text-main); /* Keep it the same color, just italic */
 }
 
+/* Sub-navigation links */
 .sub-nav {
     margin-top: 20px;
     font-family: var(--font-sans);
@@ -111,9 +120,10 @@ header {
     margin: 0 15px;
     color: var(--text-muted);
     font-weight: 600;
-    position: relative;
+    position: relative; /* Needed for the hover effect below */
 }
 
+/* A subtle underline hover effect for nav links */
 .sub-nav a::after {
     content: '';
     position: absolute;
@@ -125,7 +135,9 @@ header {
     transition: width 0.3s ease;
 }
 
-.sub-nav a:hover::after { width: 100%; }
+.sub-nav a:hover::after {
+    width: 100%;
+}
 
 /* =========================================
    5. THE GALLERY GRID (Homepage)
@@ -142,11 +154,12 @@ header {
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Smooth lift animation */
     display: flex;
     flex-direction: column;
 }
 
+/* The Lift Effect */
 .gallery-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
@@ -154,7 +167,7 @@ header {
 
 .image-wrapper {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; /* Forces perfect square */
     background-color: #eee;
 }
 
@@ -189,7 +202,7 @@ header {
    6. SINGLE VERSE PAGE
    ========================================= */
 .verse-container {
-    max-width: 650px;
+    max-width: 650px; /* Narrower column for reading focus */
     margin: 0 auto;
 }
 
@@ -203,7 +216,7 @@ header {
 .verse-container h1 {
     font-size: 2rem;
     text-align: center;
-    color: var(--text-muted);
+    color: var(--text-muted); /* The reference (e.g. John 3:16) is subtle */
     margin-bottom: 10px;
 }
 
@@ -223,7 +236,7 @@ header {
 }
 
 /* =========================================
-   7. BUTTONS
+   7. BUTTONS (The Friendly "Pill" Shape)
    ========================================= */
 .action-buttons {
     display: flex;
@@ -239,18 +252,20 @@ header {
     padding: 10px 24px;
     font-family: var(--font-sans);
     font-weight: 600;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Pill Shape */
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.95rem;
 }
 
+/* Hover State */
 .action-btn:hover, button[type="submit"]:hover, #share-btn:hover {
     background-color: var(--text-main);
     color: white;
-    transform: scale(1.02);
+    transform: scale(1.02); /* Tiny grow effect */
 }
 
+/* The Green "Success" State for Copied */
 .copied-state {
     background-color: #4CAF50 !important;
     border-color: #4CAF50 !important;
@@ -258,7 +273,7 @@ header {
 }
 
 /* =========================================
-   8. COMPONENTS
+   8. COMPONENTS (Subscribe & Footer)
    ========================================= */
 .subscribe-box {
     background-color: var(--card-bg);
@@ -272,7 +287,7 @@ header {
 .subscribe-box input {
     padding: 12px;
     border: 1px solid #ddd;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Inputs are pills too */
     width: 60%;
     font-family: var(--font-sans);
 }
@@ -337,7 +352,7 @@ footer {
 }
 
 .mission-section p {
-    text-align: left;
+    text-align: left; /* Easier to read paragraphs when left-aligned */
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 20px;
@@ -362,21 +377,60 @@ footer {
 }
 
 /* =========================================
-   11. MOBILE POLISH
+   11. MOBILE POLISH (The "App" Feel)
    ========================================= */
 @media (max-width: 600px) {
-    header { padding: 30px 15px 20px 15px; }
-    .logo-text { font-size: 1.8rem; }
-    .sub-nav a { padding: 10px 15px; margin: 0 5px; display: inline-block; }
-    input[type="email"], input[type="text"] { font-size: 16px !important; }
-    .gallery-card:active, .action-btn:active, #share-btn:active {
-        transform: scale(0.98);
-        background-color: rgba(0,0,0,0.05);
+    
+    /* 1. COMPACT HEADER: Save screen space */
+    header {
+        padding: 30px 15px 20px 15px; /* Reduce top padding significantly */
     }
-    * { -webkit-tap-highlight-color: transparent; }
-    .gallery-grid { grid-template-columns: 1fr; gap: 25px; }
-    .gallery-card { border-radius: 0; box-shadow: none; border-bottom: 1px solid #eee; }
-    .image-wrapper { aspect-ratio: 4/3; }
+    
+    .logo-text {
+        font-size: 1.8rem; /* Slightly smaller logo */
+    }
+
+    /* 2. THUMB-FRIENDLY NAV: Make links easier to tap */
+    .sub-nav a {
+        padding: 10px 15px; /* Increases the clickable area */
+        margin: 0 5px;
+        display: inline-block; /* Essential for padding to work */
+    }
+
+    /* 3. INPUT ZOOM FIX: Prevents iOS from zooming in when typing */
+    input[type="email"], input[type="text"] {
+        font-size: 16px !important; /* Must be 16px+ on iOS */
+    }
+
+    /* 4. TACTILE FEEDBACK: Since there is no "Hover", use "Active" (Press) */
+    .gallery-card:active, .action-btn:active, #share-btn:active {
+        transform: scale(0.98); /* Shrinks slightly when you touch it */
+        background-color: rgba(0,0,0,0.05); /* subtle flash */
+    }
+
+    /* 5. REMOVE BLUE TAP BOX: Removes the default blue highlight on Android/iOS */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* 6. FULL WIDTH GALLERY: Make images immersive */
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Force single column */
+        gap: 25px;
+    }
+    
+    .gallery-card {
+        border-radius: 0; /* Optional: Edge-to-edge look like Instagram */
+        box-shadow: none; /* Flat design looks better on mobile lists */
+        border-bottom: 1px solid #eee; /* Simple separator */
+    }
+    
+    /* Make the image wrapper slightly shorter so you can see the title peeking up */
+    .image-wrapper {
+        aspect-ratio: 4/3; 
+    }
+    
+    /* Mobile text adjustments */
     .verse-container h1 { font-size: 1.5rem; }
     blockquote { font-size: 1.2rem; }
     .subscribe-box input { width: 100%; margin-bottom: 10px; }
@@ -384,7 +438,7 @@ footer {
 }
 
 /* =========================================
-   12. VIEW TRANSITIONS
+   12. VIEW TRANSITIONS (The Magic Morph)
    ========================================= */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -410,4 +464,40 @@ footer {
 .image-wrapper img.loaded, .verse-container img.loaded {
     opacity: 1;
     filter: blur(0);
+}
+
+/* =========================================
+   14. MICRO-INTERACTIONS (Delight)
+   ========================================= */
+
+/* A. The "Gentle Reveal" for Text */
+.reflection {
+    opacity: 0;
+    transform: translateY(30px); 
+    transition: all 0.8s ease-out;
+}
+
+.reflection.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* B. The "Amen" Heart Animation */
+.amen-particle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1.5rem;
+    color: var(--accent);
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(1.5);
+    }
 }
