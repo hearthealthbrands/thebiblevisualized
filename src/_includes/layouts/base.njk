@@ -3,27 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | The Bible Visualized</title>
+    
+    <title>{{ title or "The Bible Visualized" }}</title>
     
     <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ verse_text or 'Daily scripture visualized through AI art.' }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://thebiblevisualized.com{{ page.url }}" />
+    
     <meta property="og:image" content="https://thebiblevisualized.com{{ image }}" />
-    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://thebiblevisualized.com{{ image }}">
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header style="padding: 20px; text-align: center; border-bottom: 1px solid #ccc;">
+
+    <header style="padding: 20px; text-align: center; border-bottom: 1px solid #eee;">
         <nav>
-            <a href="/" style="text-decoration: none; font-weight: bold; font-size: 1.2rem;">THE BIBLE VISUALIZED</a>
+            <a href="/" style="text-decoration: none; font-weight: bold; font-size: 1.5rem; color: #333; letter-spacing: -1px;">
+                THE BIBLE VISUALIZED
+            </a>
+            <div style="margin-top: 10px; font-size: 0.9rem;">
+                <a href="/" style="margin-right: 15px; color: #666; text-decoration: none;">Gallery</a>
+                <a href="/about" style="color: #666; text-decoration: none;">About</a>
+            </div>
         </nav>
     </header>
 
-    <main style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <main style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
         {{ content | safe }}
     </main>
 
-    <footer style="margin-top: 50px; text-align: center; font-size: 0.8rem; color: #666;">
+    <footer style="margin-top: 50px; padding: 40px 20px; text-align: center; font-size: 0.8rem; color: #888; border-top: 1px solid #eee;">
         <p>&copy; 2025 The Bible Visualized</p>
+        <p>Visualizing the Word, one verse at a time.</p>
     </footer>
+
 </body>
 </html>
