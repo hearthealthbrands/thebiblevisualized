@@ -1,6 +1,6 @@
 ---
 layout: layouts/base.njk
-title: Home
+title: Collection
 ---
 
 <div class="gallery-grid">
@@ -10,14 +10,26 @@ title: Home
       <div class="image-wrapper">
         <img 
           src="{{ post.data.image }}" 
-          alt="{{ post.data.title }}" 
+          alt="{{ post.data.verse_ref }}" 
           loading="lazy"
           style="view-transition-name: img-{{ post.fileSlug }};"
         >
       </div>
       
       <div class="card-info">
-        <h3>{{ post.data.title }}</h3> <span class="date">{{ post.date | dateString }}</span>
+        
+        <span class="theme-tag">
+          {{ post.data.tags[1] or "Scripture" }}
+        </span>
+
+        <h3>{{ post.data.verse_ref }}</h3> 
+
+        <p class="verse-snippet">
+          "{{ post.data.verse_text }}"
+        </p>
+
+        <span class="card-cta">Read Reflection &rarr;</span>
+      
       </div>
     </a>
   {% endfor %}

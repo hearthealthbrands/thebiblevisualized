@@ -154,21 +154,25 @@ header {
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-soft);
-    transition: all 0.3s ease; /* Smooth lift animation */
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
+    height: 100%; /* Ensures cards in the same row match height */
+    border: 1px solid rgba(0,0,0,0.03); /* Very subtle outline */
 }
 
 /* The Lift Effect */
 .gallery-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-color: rgba(197, 160, 101, 0.3); /* Border turns subtle gold */
 }
 
 .image-wrapper {
     width: 100%;
     aspect-ratio: 1 / 1; /* Forces perfect square */
     background-color: #eee;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .image-wrapper img {
@@ -178,26 +182,71 @@ header {
     display: block;
 }
 
+/* --- New Card Info Layout --- */
 .card-info {
-    padding: 20px;
+    padding: 25px 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1; /* Fills the remaining space */
 }
 
+/* A. Theme Tag */
+.theme-tag {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    background-color: #F4F4F4;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* B. Reference (Heading) */
 .card-info h3 {
     font-family: var(--font-serif);
-    font-size: 1.1rem;
-    margin: 0 0 5px 0;
+    font-size: 1.3rem;
+    margin: 0 0 10px 0;
     color: var(--text-main);
 }
 
-.card-info .date {
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+/* C. Verse Snippet (The Fade Out) */
+.verse-snippet {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    
+    /* The "Line Clamp" Magic */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
+/* D. Call to Action */
+.card-cta {
+    margin-top: auto; /* Pushes CTA to the bottom */
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease;
+}
+
+/* CTA Hover Animation: Slide the arrow */
+.gallery-card:hover .card-cta {
+    transform: translateX(5px); /* Subtle slide right */
+    color: var(--accent-hover);
+}
 /* =========================================
    6. SINGLE VERSE PAGE
    ========================================= */
