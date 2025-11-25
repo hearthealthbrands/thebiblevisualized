@@ -1,182 +1,174 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. SHARE BUTTON LOGIC (Footer)
+    // ======================================================
+    // 1. VISUAL PEACE (The "Anti-Bug" Image Loader)
+    // ======================================================
+    const images = document.querySelectorAll('.image-wrapper img, .verse-container img');
+
+    const revealImage = (img) => {
+        // Only add the class if it's not already there
+        if (!img.classList.contains('loaded')) {
+            img.classList.add('loaded');
+        }
+    };
+
+    images.forEach(img => {
+        if (img.complete) {
+            // If image is already downloaded (cache), show immediately
+            revealImage(img);
+        } else {
+            // Otherwise wait for load
+            img.addEventListener('load', () => revealImage(img));
+            // Backup: If error occurs, show it anyway so it's not invisible
+            img.addEventListener('error', () => revealImage(img));
+        }
+    });
+
+    // FAILSAFE: Force all images to show after 1 second
+    // This prevents the "Invisible Image" bug if the browser gets stuck
+    setTimeout(() => {
+        images.forEach(img => revealImage(img));
+    }, 1000);
+
+
+    // ======================================================
+    // 2. SCROLL REVEAL (Text Fade-In)
+    // ======================================================
+    const reflectionSection = document.querySelector('.reflection');
+    
+    if (reflectionSection) {
+        // Check if browser supports the Observer API
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger sooner (10% visible)
+
+            observer.observe(reflectionSection);
+        } else {
+            // Fallback for older browsers: Just show it immediately
+            reflectionSection.classList.add('visible');
+        }
+    }
+
+
+    // ======================================================
+    // 3. SHARE BUTTON LOGIC (Footer)
+    // ======================================================
     const shareBtn = document.getElementById('share-btn');
     
-    if (shareBtn && navigator.share) {
+    if (shareBtn) {
         shareBtn.addEventListener('click', async () => {
-            try {
-                await navigator.share({
-                    title: document.title,
-                    text: 'Check out this visualization of scripture:',
-                    url: window.location.href
-                });
-            } catch (err) {
-                console.log('Error sharing:', err);
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: document.title,
+                        text: 'Visualizing scripture:',
+                        url: window.location.href
+                    });
+                } catch (err) { console.log('Share dismissed'); }
+            } else {
+                // Desktop Fallback
+                navigator.clipboard.writeText(window.location.href);
+                const originalText = shareBtn.innerText;
+                shareBtn.innerText = "Link Copied!";
+                setTimeout(() => shareBtn.innerText = originalText, 2000);
             }
         });
-    } else if (shareBtn) {
-        // Fallback for desktop
-        shareBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(window.location.href);
-            alert('Link copied to clipboard!');
-        });
     }
 
-    // 2. DYNAMIC YEAR
-    const yearSpan = document.querySelector('#copyright-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
 
-    // 3. COPY VERSE LOGIC + "AMEN" EFFECT
+    // ======================================================
+    // 4. COPY VERSE & HEART EFFECT
+    // ======================================================
     const copyBtn = document.getElementById('copy-verse-btn');
     const verseTextElement = document.getElementById('daily-verse');
 
     if (copyBtn && verseTextElement) {
-        // Ensure the button is positioned relatively so the heart floats from IT
-        copyBtn.style.position = 'relative';
+        copyBtn.style.position = 'relative'; // Ensure heart floats correctly
 
         copyBtn.addEventListener('click', async () => {
             try {
-                const textToCopy = verseTextElement.innerText;
-                await navigator.clipboard.writeText(textToCopy);
+                await navigator.clipboard.writeText(verseTextElement.innerText);
                 
-                // A. Button State Change
+                // Visual Button Feedback
                 const originalText = copyBtn.innerText;
                 copyBtn.innerText = "Copied!";
                 copyBtn.classList.add('copied-state');
                 
-                // B. The "Amen" Particle Effect
+                // Heart Animation
                 const heart = document.createElement('span');
                 heart.innerText = ❤️"; 
                 heart.classList.add('amen-particle');
                 
-                // Center the heart on the button
+                // Center heart
                 heart.style.left = '50%';
+                heart.style.marginLeft = '-10px';
                 heart.style.top = '0';
-                heart.style.marginLeft = '-10px'; // Half the width to center it
                 
                 copyBtn.appendChild(heart);
 
-                // Remove heart after animation
-                setTimeout(() => {
-                    heart.remove();
-                }, 1000);
-                
-                // Revert button text
+                // Cleanup
+                setTimeout(() => heart.remove(), 1000);
                 setTimeout(() => {
                     copyBtn.innerText = originalText;
                     copyBtn.classList.remove('copied-state');
                 }, 2000);
                 
-            } catch (err) {
-                console.error('Failed to copy!', err);
-            }
+            } catch (err) { console.error('Copy failed', err); }
         });
     }
 
-    // 4. VISUAL PEACE (Blur-Up Image Loader)
-    const images = document.querySelectorAll('.image-wrapper img, .verse-container img');
 
-    images.forEach(img => {
-        const reveal = () => {
-            img.classList.add('loaded');
-        };
-
-        if (img.complete) {
-            reveal();
-        } else {
-            img.addEventListener('load', reveal);
-        }
-    });
-
-    // 5. SCROLL REVEAL (The "Gentle Reveal")
-    const observerOptions = {
-        threshold: 0.2 
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); 
-            }
-        });
-    }, observerOptions);
-
-    const reflectionSection = document.querySelector('.reflection');
-    if (reflectionSection) {
-        observer.observe(reflectionSection);
-    }
-
-    // 6. NAVIGATION (Keyboard & Swipe)
+    // ======================================================
+    // 5. NAVIGATION (Keyboard & Swipe)
+    // ======================================================
     const body = document.body;
     const prevUrl = body.getAttribute('data-prev');
     const nextUrl = body.getAttribute('data-next');
 
-    // Helper: Go to URL if it exists
     const navigate = (url) => {
         if (url) {
-            // Slight visual feedback before moving
             document.body.style.opacity = '0.5';
             document.body.style.transition = 'opacity 0.2s ease';
-            setTimeout(() => {
-                window.location.href = url;
-            }, 100);
+            setTimeout(() => window.location.href = url, 100);
         }
     };
 
-    // A. Keyboard Support
+    // Keyboard
     document.addEventListener('keydown', (e) => {
-        if (e.target.tagName === 'INPUT') return; // Ignore if typing
-
-        if (e.key === 'ArrowLeft' && prevUrl) {
-            navigate(prevUrl);
-        } else if (e.key === 'ArrowRight' && nextUrl) {
-            navigate(nextUrl);
-        }
+        if (e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowLeft' && prevUrl) navigate(prevUrl);
+        if (e.key === 'ArrowRight' && nextUrl) navigate(nextUrl);
     });
 
-    // B. Touch Swipe Support
+    // Swipe (Touch)
     let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, false);
-
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
     document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, false);
+        if (touchStartX - e.changedTouches[0].screenX > 50 && nextUrl) navigate(nextUrl); // Swipe Left
+        if (e.changedTouches[0].screenX - touchStartX > 50 && prevUrl) navigate(prevUrl); // Swipe Right
+    }, {passive: true});
 
-    function handleSwipe() {
-        const swipeThreshold = 50; 
-        
-        // Swipe Left (Go Next)
-        if (touchStartX - touchEndX > swipeThreshold) {
-            if (nextUrl) navigate(nextUrl);
-        }
-        
-        // Swipe Right (Go Previous)
-        if (touchEndX - touchStartX > swipeThreshold) {
-            if (prevUrl) navigate(prevUrl);
-        }
-    }
 
-    // 8. DYNAMIC SHARE BAR INJECTOR (Single Post)
+    // ======================================================
+    // 6. DYNAMIC SHARE BAR INJECTOR
+    // ======================================================
     const sharePlaceholder = document.getElementById('dynamic-share-bar');
     
     if (sharePlaceholder) {
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent(document.title);
         
-        // Find the Hero Image for Pinterest
+        // Try to find the hero image, or default to empty
         const heroImg = document.querySelector('.verse-container img');
         const media = heroImg ? encodeURIComponent(heroImg.src) : '';
 
-        // SVG Icons
+        // Clean SVG Icons
         const icons = {
             x: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"/></svg>`,
             fb: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>`,
@@ -196,10 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         sharePlaceholder.innerHTML = html;
 
-        // Logic for the Copy Link button
+        // Copy Link Button Logic
         document.getElementById('copy-link-btn').addEventListener('click', () => {
             navigator.clipboard.writeText(window.location.href);
-            // Visual feedback
             const btn = document.getElementById('copy-link-btn');
             const originalColor = btn.style.color;
             btn.style.color = 'var(--accent)';
@@ -210,5 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1000);
         });
     }
+
+    // ======================================================
+    // 7. UTILS: Dynamic Copyright Year
+    // ======================================================
+    const yearSpan = document.querySelector('#copyright-year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
 });
