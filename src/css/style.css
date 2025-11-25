@@ -1,32 +1,35 @@
 /* =========================================
    1. THE DNA (Variables & Fonts)
    ========================================= */
+/* Import Google Fonts: 'Lora' (Serif) and 'Inter' (Sans-Serif) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
     /* Color Palette: "Warm Minimalism" */
-    --bg-paper:      #F9F7F2;
-    --card-bg:       #FFFFFF;
-    --text-main:     #2C2C2C;
-    --text-muted:    #666666;
-    --accent:        #C5A065;
-    --accent-hover:  #B08D55;
+    --bg-paper:      #F9F7F2;  /* The warm off-white page background */
+    --card-bg:       #FFFFFF;  /* Pure white for cards so they "pop" */
+    --text-main:     #2C2C2C;  /* Charcoal (softer than black) */
+    --text-muted:    #666666;  /* For dates and secondary text */
+    --accent:        #C5A065;  /* Muted Gold for highlights */
+    --accent-hover:  #B08D55;  /* Slightly darker gold for hover states */
     
     /* Typography */
-    --font-serif:    'Lora', serif;
-    --font-sans:     'Inter', sans-serif;
+    --font-serif:    'Lora', serif;       /* For Verses & Headings */
+    --font-sans:     'Inter', sans-serif; /* For UI & Reflections */
     
     /* Spacing & Shapes */
-    --radius-card:   12px;
-    --radius-pill:   50px;
-    --shadow-soft:   0 4px 20px rgba(0, 0, 0, 0.05);
-    --shadow-hover:  0 8px 30px rgba(0, 0, 0, 0.12);
+    --radius-card:   12px;     /* Soft corners for images/cards */
+    --radius-pill:   50px;     /* Friendly "Pill" shape for buttons */
+    --shadow-soft:   0 4px 20px rgba(0, 0, 0, 0.05); /* The "floating" feel */
+    --shadow-hover:  0 8px 30px rgba(0, 0, 0, 0.12); /* Lift effect */
 }
 
 /* =========================================
    2. GLOBAL RESET & LAYOUT
    ========================================= */
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 html {
     scroll-behavior: smooth; /* Enables smooth jump to Subscribe */
@@ -39,15 +42,16 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; /* Makes fonts look crisp on Mac */
 }
 
+/* The Main Container */
 main {
     max-width: 900px;
     margin: 0 auto;
     padding: 40px 20px;
-    animation: fadeIn 0.8s ease-in-out;
-    min-height: 60vh;
+    animation: fadeIn 0.8s ease-in-out; /* Gentle fade-in on load */
+    min-height: 60vh; /* Ensures footer doesn't float up on empty pages */
 }
 
 a {
@@ -56,7 +60,9 @@ a {
     transition: color 0.2s ease;
 }
 
-a:hover { color: var(--accent); }
+a:hover {
+    color: var(--accent);
+}
 
 /* =========================================
    3. TYPOGRAPHY
@@ -73,7 +79,7 @@ blockquote {
     font-size: 1.4rem;
     font-style: italic;
     color: var(--text-main);
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--accent); /* The Gold Accent Line */
     margin: 30px 0;
     padding-left: 25px;
 }
@@ -179,6 +185,7 @@ header {
     border: 1px solid rgba(0,0,0,0.03);
 }
 
+/* The Lift Effect */
 .gallery-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
@@ -187,7 +194,7 @@ header {
 
 .image-wrapper {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; /* Forces perfect square */
     background-color: #eee;
     border-bottom: 1px solid #f0f0f0;
 }
@@ -209,6 +216,7 @@ header {
     flex-grow: 1;
 }
 
+/* Theme Tag */
 .theme-tag {
     font-family: var(--font-sans);
     font-size: 0.7rem;
@@ -222,6 +230,7 @@ header {
     border-radius: 20px;
 }
 
+/* Reference (Heading) */
 .card-info h3 {
     font-family: var(--font-serif);
     font-size: 1.3rem;
@@ -229,6 +238,7 @@ header {
     color: var(--text-main);
 }
 
+/* Verse Snippet (The Fade Out) */
 .verse-snippet {
     font-family: var(--font-serif);
     font-style: italic;
@@ -242,6 +252,7 @@ header {
     overflow: hidden;
 }
 
+/* Call to Action */
 .card-cta {
     margin-top: auto;
     font-family: var(--font-sans);
@@ -334,13 +345,14 @@ header {
    8. COMPONENTS (Subscribe & Footer)
    ========================================= */
 .subscribe-box {
-    background-color: rgba(0, 0, 0, 0.02); /* Lighter background */
+    background-color: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 40px;
+    padding: 40px 30px;
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-soft);
     text-align: center;
     margin: 60px auto;
+    max-width: 480px; 
+    width: 100%; 
 }
 
 .subscribe-box h3 {
@@ -355,23 +367,38 @@ header {
     font-size: 0.95rem;
     color: var(--text-muted);
     margin-bottom: 25px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* Form Layout */
+.form-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
 }
 
 .subscribe-box input {
-    padding: 12px;
+    flex: 1;
+    padding: 12px 20px;
     border: 1px solid #ddd;
     border-radius: var(--radius-pill);
-    width: 60%;
     font-family: var(--font-sans);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.subscribe-box input:focus {
+    border-color: var(--accent);
 }
 
 .subscribe-box button {
     background-color: var(--accent);
     border-color: var(--accent);
     color: white;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 12px 24px;
 }
 
 .subscribe-box button:hover {
@@ -460,7 +487,12 @@ footer {
     .logo-text { font-size: 1.5rem; }
     .sub-nav { margin-top: 5px; font-size: 0.8rem; }
     .sub-nav a { padding: 10px 15px; margin: 0 5px; display: inline-block; }
-    input[type="email"], input[type="text"] { font-size: 16px !important; }
+    
+    /* Stack the form on mobile */
+    .form-row { flex-direction: column; }
+    .subscribe-box input { width: 100%; font-size: 16px !important; margin-bottom: 0; }
+    .subscribe-box button { width: 100%; }
+
     .gallery-card:active, .action-btn:active, #share-btn:active {
         transform: scale(0.98);
         background-color: rgba(0,0,0,0.05);
@@ -471,8 +503,6 @@ footer {
     .image-wrapper { aspect-ratio: 4/3; }
     .verse-container h1 { font-size: 1.5rem; }
     blockquote { font-size: 1.2rem; }
-    .subscribe-box input { width: 100%; margin-bottom: 10px; }
-    .form-row { flex-direction: column; }
 }
 
 /* =========================================
