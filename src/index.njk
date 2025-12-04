@@ -3,6 +3,9 @@ layout: layouts/base.njk
 title: Collection
 ---
 
+<!-- SEO: Hidden Heading for Search Engines -->
+<h1 class="visually-hidden">The Bible Visualized: A Digital Scripture Gallery</h1>
+
 <div class="gallery-grid">
   {% for post in collections.post | reverse %}
     <a href="{{ post.url }}" class="gallery-card">
