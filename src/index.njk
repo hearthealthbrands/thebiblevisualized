@@ -3,9 +3,119 @@ layout: layouts/base.njk
 title: Collection
 ---
 
+<!-- ADVENT BANNER STYLES -->
+<style>
+  .advent-hero {
+    background-color: #1A2F1C; /* Deep Evergreen */
+    color: #F4F5F0;
+    padding: 50px 40px;
+    border-radius: 12px;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(197, 160, 101, 0.2);
+    box-shadow: 0 10px 30px rgba(26, 47, 28, 0.15); /* Soft shadow for depth */
+  }
+
+  .advent-hero::before {
+    /* Subtle Gold Accent Line */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #C5A065;
+  }
+
+  .series-label {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #C5A065;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .advent-hero h2 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    margin: 0 0 15px 0;
+    color: white;
+    line-height: 1.1;
+  }
+
+  .advent-hero p {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .hero-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: #C5A065;
+    color: #1A2F1C;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-btn:hover {
+    transform: translateY(-2px);
+    background-color: #dcb374;
+    color: #1A2F1C;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  /* --- MOBILE OPTIMIZATION --- */
+  @media (max-width: 600px) {
+    .advent-hero {
+      padding: 40px 20px; /* Reduces padding on small screens */
+      margin-bottom: 30px;
+      border-radius: 8px; /* Slightly tighter radius */
+    }
+
+    .advent-hero h2 {
+      font-size: 2.2rem; /* Smaller headline for mobile */
+    }
+
+    .advent-hero p {
+      font-size: 1rem;
+      margin-bottom: 25px;
+    }
+
+    .hero-btn {
+      width: 100%; /* Full width button for easier tapping */
+      padding: 16px 0;
+    }
+  }
+</style>
+
 <!-- SEO: Hidden Heading for Search Engines -->
 <h1 class="visually-hidden">The Bible Visualized: A Digital Scripture Gallery</h1>
 
+<!-- HERO BANNER -->
+<div class="advent-hero">
+  <span class="series-label">Current Series</span>
+  <h2>The Arrival</h2>
+  <p>A visual journey through the season of Advent. Exploring the themes of Hope, Peace, Joy, and Love through art and scripture.</p>
+  <a href="/advent" class="hero-btn">View the Series &rarr;</a>
+</div>
+
+<!-- MAIN GALLERY -->
 <div class="gallery-grid">
   {% for post in collections.post | reverse %}
     <a href="{{ post.url }}" class="gallery-card">
