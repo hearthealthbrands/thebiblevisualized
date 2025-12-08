@@ -1,0 +1,296 @@
+---
+layout: layouts/base.njk
+title: "Advent: The Arrival"
+---
+
+<!-- ADVENT SPECIFIC STYLES -->
+<style>
+    :root {
+        --advent-gold: #C5A065;
+        --advent-dark: #1A2F1C; /* Deep Evergreen */
+        --advent-light: #F4F5F0;
+    }
+
+    .advent-header {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: var(--advent-dark);
+        color: var(--advent-light);
+        border-radius: 12px;
+        margin-bottom: 60px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .advent-header h1 {
+        font-family: var(--font-serif);
+        font-size: 3.5rem;
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+    }
+
+    .advent-header p {
+        font-family: var(--font-sans);
+        font-size: 1.1rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* THE TIMELINE */
+    .timeline-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-left: 20px;
+    }
+
+    /* Vertical Line */
+    .timeline-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 20px; /* Aligns with the dots */
+        width: 2px;
+        background: #e0e0e0;
+        z-index: 0;
+    }
+
+    .week-block {
+        position: relative;
+        margin-bottom: 60px;
+        padding-left: 50px; /* Space for the line/dot */
+        z-index: 1;
+    }
+
+    /* The Dot */
+    .week-marker {
+        position: absolute;
+        left: 11px;
+        top: 25px; /* Aligns with Title */
+        width: 20px;
+        height: 20px;
+        background-color: var(--bg-paper);
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+
+    /* Active State (When content exists) */
+    .week-block.active .week-marker {
+        background-color: var(--advent-gold);
+        border-color: var(--advent-gold);
+        box-shadow: 0 0 0 4px rgba(197, 160, 101, 0.2);
+    }
+
+    .week-label {
+        font-family: var(--font-sans);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .week-title {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--text-main);
+    }
+
+    /* CARD STYLING (Mini Version of Homepage) */
+    .advent-card {
+        display: flex;
+        background: white;
+        border: 1px solid rgba(0,0,0,0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+        margin-bottom: 15px; /* In case of multiple posts per week */
+    }
+
+    .advent-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .advent-card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .advent-card-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .advent-card h4 {
+        margin: 0 0 5px 0;
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--text-main);
+    }
+
+    .advent-card span {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        color: var(--accent);
+    }
+
+    /* COMING SOON STATE */
+    .coming-soon {
+        padding: 30px;
+        border: 1px dashed #ccc;
+        border-radius: 8px;
+        color: #999;
+        font-family: var(--font-sans);
+        font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+        .advent-header h1 { font-size: 2.5rem; }
+        .timeline-container { padding-left: 0; }
+        .timeline-container::before { left: 10px; }
+        .week-marker { left: 1px; }
+        .week-block { padding-left: 35px; }
+        .advent-card img { width: 80px; height: 80px; }
+    }
+</style>
+
+<div class="advent-header">
+    <h1>The Arrival</h1>
+    <p>A 5-part visual journey through the season of Advent. Exploring the theology of Christ's coming through art, scripture, and reflection.</p>
+</div>
+
+<div class="timeline-container">
+
+    {# --- WEEK 1: HOPE --- #}
+    {% set week1 = collections.hope %}
+    <div class="week-block {% if week1.length %}active{% endif %}">
+        <div class="week-marker"></div>
+        <span class="week-label">Week 1</span>
+        <h2 class="week-title">Hope</h2>
+        
+        {% if week1.length %}
+            {% for post in week1 %}
+                <a href="{{ post.url }}" class="advent-card">
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
+                    <div class="advent-card-content">
+                        <h4>{{ post.data.title }}</h4>
+                        <span>Read Reflection &rarr;</span>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="coming-soon">
+                Waiting for the light...
+            </div>
+        {% endif %}
+    </div>
+
+    {# --- WEEK 2: PEACE --- #}
+    {% set week2 = collections.peace %}
+    <div class="week-block {% if week2.length %}active{% endif %}">
+        <div class="week-marker"></div>
+        <span class="week-label">Week 2</span>
+        <h2 class="week-title">Peace</h2>
+
+        {% if week2.length %}
+            {% for post in week2 %}
+                <a href="{{ post.url }}" class="advent-card">
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
+                    <div class="advent-card-content">
+                        <h4>{{ post.data.title }}</h4>
+                        <span>Read Reflection &rarr;</span>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="coming-soon">
+                Arriving soon...
+            </div>
+        {% endif %}
+    </div>
+
+    {# --- WEEK 3: JOY --- #}
+    {% set week3 = collections.joy %}
+    <div class="week-block {% if week3.length %}active{% endif %}">
+        <div class="week-marker"></div>
+        <span class="week-label">Week 3</span>
+        <h2 class="week-title">Joy</h2>
+
+        {% if week3.length %}
+            {% for post in week3 %}
+                <a href="{{ post.url }}" class="advent-card">
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
+                    <div class="advent-card-content">
+                        <h4>{{ post.data.title }}</h4>
+                        <span>Read Reflection &rarr;</span>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="coming-soon">
+                Arriving soon...
+            </div>
+        {% endif %}
+    </div>
+
+    {# --- WEEK 4: LOVE --- #}
+    {% set week4 = collections.love %}
+    <div class="week-block {% if week4.length %}active{% endif %}">
+        <div class="week-marker"></div>
+        <span class="week-label">Week 4</span>
+        <h2 class="week-title">Love</h2>
+
+        {% if week4.length %}
+            {% for post in week4 %}
+                <a href="{{ post.url }}" class="advent-card">
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
+                    <div class="advent-card-content">
+                        <h4>{{ post.data.title }}</h4>
+                        <span>Read Reflection &rarr;</span>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="coming-soon">
+                Arriving soon...
+            </div>
+        {% endif %}
+    </div>
+
+    {# --- CHRISTMAS DAY --- #}
+    {% set week5 = collections.christ %}
+    <div class="week-block {% if week5.length %}active{% endif %}">
+        <div class="week-marker" style="border-color: var(--accent);"></div>
+        <span class="week-label">Christmas Day</span>
+        <h2 class="week-title">Christ</h2>
+
+        {% if week5.length %}
+            {% for post in week5 %}
+                <a href="{{ post.url }}" class="advent-card">
+                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
+                    <div class="advent-card-content">
+                        <h4>{{ post.data.title }}</h4>
+                        <span>Read Reflection &rarr;</span>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="coming-soon">
+                The Arrival.
+            </div>
+        {% endif %}
+    </div>
+
+</div>
