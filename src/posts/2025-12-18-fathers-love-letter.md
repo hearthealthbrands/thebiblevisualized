@@ -8,6 +8,7 @@ verse_text: "My Child, you may not know me, but I know everything about you..."
 tags: ["post", "love", "identity", "encouragement"]
 ---
 
+<!-- CUSTOM STYLES FOR THE LETTER -->
 <style>
     :root {
         --accent: #C5A065; /* Keeping the warm gold */
@@ -76,6 +77,7 @@ tags: ["post", "love", "identity", "encouragement"]
         An intimate message from God to you, paraphrased from Scripture.
     </p>
 
+    <!-- THE LETTER CONTENT -->
     <div class="letter-body">
         
         <span class="letter-line">My Child,</span>
@@ -196,8 +198,9 @@ tags: ["post", "love", "identity", "encouragement"]
         <button id="copy-verse-btn" class="action-btn" onclick="copyUrl()">Share This Letter</button>
     </div>
     
+    <!-- UPDATED ATTRIBUTION -->
     <div class="source-credit">
-        Used with permission. <a href="https://www.fathersloveletter.com" target="_blank" rel="noopener">Father's Love Letter</a> used by permission Father Heart Communications ©1999.
+        Inspired by the original Father's Love Letter created by <a href="https://www.fathersloveletter.com" target="_blank" rel="noopener">Father Heart Communications</a>. Visit their site for more.
     </div>
     
     <script>
