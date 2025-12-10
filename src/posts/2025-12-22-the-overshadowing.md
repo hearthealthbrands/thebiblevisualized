@@ -5,13 +5,13 @@ date: 2025-12-22
 image: "/images/annunciation.jpg"
 verse_ref: "Luke 1:35"
 verse_text: "The Holy Spirit will come on you, and the power of the Most High will overshadow you."
-tags: ["post", "advent", "joy", "luke", "mary"]
+tags: ["post", "advent", "love", "luke", "mary"]
 ---
 
 <!-- 
     ART DIRECTION: 
-    Week 3 (Joy) uses a Warm Amber/Glory theme 
-    to represent the light of the Angel and the Shekinah glory.
+    Week 4 (Love) uses a Majestic Gold/Glory theme.
+    This represents the final candle—the "Angel's Candle."
 -->
 <style>
     :root {
@@ -19,9 +19,8 @@ tags: ["post", "advent", "joy", "luke", "mary"]
         --accent-hover: #B5952F; /* Darker Gold */
     }
     
-    /* Special styling for the interactive box */
     .interactive-box {
-        background-color: #FDFBF7; /* Cream */
+        background-color: #FDFBF7; 
         border: 1px solid rgba(212, 175, 55, 0.3);
         padding: 30px;
         border-radius: 12px;
@@ -51,7 +50,7 @@ tags: ["post", "advent", "joy", "luke", "mary"]
     <div id="dynamic-share-bar"></div>
     
     <div class="reflection">
-        <h3>Week 3: Joy</h3>
+        <h3>Week 4: Love</h3>
         <p>
             When we think of "Preparation" for Christmas, we usually think of logistics: buying gifts, planning meals, and hanging lights.
         </p>
@@ -65,16 +64,16 @@ tags: ["post", "advent", "joy", "luke", "mary"]
             <strong>This is the same language used in Exodus for the Cloud of Glory filling the Tabernacle.</strong>
         </p>
         <p>
-            Mary wasn't just being asked to carry a baby; she was being asked to become the new Holy of Holies. To house the presence of God.
+            Love is not just a gentle affection; it is a powerful, overshadowing presence. God loved the world so much that He didn't send a letter; He sent Himself. He asked a teenager to become the new Holy of Holies—to house the very presence of God.
         </p>
         <p>
-            This moment was terrifying before it was joyful. But Mary’s response changes history. She doesn't ask for a map. She doesn't negotiate the terms. She simply offers the most powerful prayer a human can pray:
+            This moment was terrifying before it was joyful. But Mary’s response changes history. She doesn't ask for a map. She simply offers the most powerful prayer a human can pray:
         </p>
         <p>
             <em>"I am the Lord’s servant. May your word to me be fulfilled."</em> (Luke 1:38)
         </p>
         <p>
-            Biblical Joy isn't the absence of fear. It is the result of surrender. We prepare for Advent not by doing more, but by surrendering more.
+            We prepare for Advent not by doing more, but by surrendering more.
         </p>
 
         <!-- INTERACTIVE ELEMENT -->
@@ -102,7 +101,6 @@ tags: ["post", "advent", "joy", "luke", "mary"]
                 url: window.location.href
             }).catch(console.error);
         } else {
-            // Fallback for desktop
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.querySelector('.interactive-box button');
                 const original = btn.innerText;
